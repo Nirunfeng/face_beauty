@@ -1,0 +1,30 @@
+body
+{
+    background:#fff;
+    text-align: center;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#canvasboxbar
+{
+    text-align: center;
+}
+
+#beautyboxbar
+{
+    text-align: center;
+}
+#canvas
+{
+    box-shadow: 5px 5px 5px #aaa;
+    cursor:text;
+}
+
+#canvasout
+{
+    box-shadow: 5px 5px 5px #aaa;
+    cursor:text;
+}

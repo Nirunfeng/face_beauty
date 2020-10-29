@@ -1,0 +1,66 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background: #fff;
+}
+
+#crema{
+    position: absolute;
+    left: 20%;
+    top:50%;
+}
+#list{
+    position: absolute;
+    left: 50%;
+    top:50%;
+}
+#upload{
+    position: absolute;
+    left:80%;
+    top:50%;
+}
+
+a{
+    text-decoration: none;
+    transform: translate(-50%,-50%);
+    font-size: 24px;
+    background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+    background-size: 400%;
+    width: 300px;
+    height: 100px;
+    color: #fff;
+    line-height: 100px;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 50px;
+    z-index: 1;
+}
+
+a::before{
+    content: "";
+    position: absolute;
+    left: -5px;
+    right: -5px;
+    top:-5px;
+    bottom:-5px;
+    background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+    background-size: 400%;
+    border-radius: 50px;
+    filter:blur(20px);
+    z-index: -1;
+}
+a:hover::before{
+    animation: sun 8s infinite;
+}
+a:hover{
+    animation: sun 8s infinite;
+}
+
+@keyframes sun{
+    100%{
+        background-position: -400% 0;
+    }
+}

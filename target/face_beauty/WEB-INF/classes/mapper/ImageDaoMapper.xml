@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.face.dao.ImageDao">
+    <resultMap id="Image" type="com.face.entity.Image">
+        <id property="id" column="id"/>
+        <id property="base64" column="base64"/>
+    </resultMap>
+    <!--ImageDao.findAllImg-->
+    <select id="findAllImg" resultMap="Image">
+        select id,base64 from image
+    </select>
+    <!--ImageDao.findImgById-->
+    <select id="findImgById" resultType="java.lang.String" parameterType="int">
+        select base64 from image where id=#{id}
+    </select>
+
+    <!--ImageDao.insertImg-->
+    <insert id="insertImg" parameterType="com.face.entity.Image">
+        insert into image(id,base64) value(null,#{base64})
+    </insert>
+
+    <!--ImageDao.deleteImg-->
+    <delete id="deleteImg" parameterType="int">
+        delete from image where id=#{id}
+    </delete>
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+    <!--1.配置datasource-->
+    <!--1.1扫描jdbc.properties文件-->
+    <context:property-placeholder location="classpath:druid.properties"/>
+    <!--1.2配置数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <!--注入jdbc配置项-->
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${user}"/>
+        <property name="password" value="${password}"/>
+    </bean>
+
+    <!--2.配置SqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--2.1注入datasource-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--2.2配置mapper扫描资源路径-->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <!--2.3配置mybatis配置文件的扫描路径-->
+        <property name="configLocation" value="classpath:spring/spring-mybatis.xml"/>
+    </bean>
+
+    <!--3.配置注解扫描-->
+    <context:component-scan base-package="com.face"/>
+
+    <!--4.配置dao扫描接口-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--4.1导入扫描位置com.face.dao-->
+        <property name="basePackage" value="com.face.dao"/>
+        <!--4.2注入sqlSession-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!--5.mvc拦截器配置-->
+    <mvc:interceptors>
+        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
+    </mvc:interceptors>
+</beans>
