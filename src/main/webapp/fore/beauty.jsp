@@ -54,6 +54,10 @@
         <input type="checkbox" id="relief"> 浮雕
     </span>
 </p>
+<%--动态数值条--%>
+<div class="valuebar">
+    <input type="range" min="0" max="100" step="1" value="10">
+</div>
 <canvas id="canvas" width="250" height="300" ></canvas>
 <canvas id="canvasout" width="250" height="300"></canvas>
 <p id="beautyboxbar">
@@ -323,6 +327,22 @@
         img.src = "${base64}";
     }
     draw();
+
+    //动态数值条变化js
+    //js代码监听效果，需要绑定监听事件，代码如下：
+
+    var elem = document.querySelector('input[type="range"]');
+    //获取一个想显示值的标签，并且初始化默认值
+    var target = document.querySelector('.value');
+    target.innerHTML = elem.value;
+
+    var rangeValue = function(){
+        var newValue = elem.value;
+        target.innerHTML = newValue;
+    }
+    //绑定input监听事件
+
+    elem.addEventListener("input", rangeValue);
 </script>
 
 </body>
